@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 PROJECT_APPS = [
     'feedback',
     'important_updates',
-    'tickets_handover'
+    'tickets_handover',
+    'profiles'
 ]
 
 INSTALLED_APPS = [
