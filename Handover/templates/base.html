@@ -1,0 +1,71 @@
+{% load markdown_extras %}
+{% load current_time %}
+{% load user_info %}
+{% load get_recent_posts %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Posts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body class="w3-black">
+{% include 'nav.html' %}
+
+<!-- Hamburger menu button for small screens -->
+<header class="w3-top w3-hide-large w3-hide-medium">
+    <button class="w3-button w3-black w3-xlarge" onclick="toggleSidebar()">
+        <i class="fa fa-bars"></i>
+    </button>
+</header>
+
+<div id="main">
+    <div class="w3-padding-large">
+        <div class="d-flex justify-content-between">
+            <p>Last refresh: {% current_time %}</p>
+            <div>{% user_info %}</div>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+
+<!-- Sidebar toggle script -->
+<script>
+function toggleSidebar() {
+    const sidebar = document.querySelector('.w3-sidebar');
+    if (sidebar.style.display === 'block') {
+        sidebar.style.display = 'none';
+    } else {
+        sidebar.style.display = 'block';
+    }
+}
+
+// Optional: close sidebar when clicking outside (mobile)
+document.addEventListener('click', function(event) {
+    const sidebar = document.querySelector('.w3-sidebar');
+    const button = document.querySelector('header button');
+    if (window.innerWidth <= 600 && sidebar.style.display === 'block') {
+        if (!sidebar.contains(event.target) && !button.contains(event.target)) {
+            sidebar.style.display = 'none';
+        }
+    }
+});
+</script>
+
+<script src="https://unpkg.com/akar-icons-fonts"></script>
+</body>
+</html>
