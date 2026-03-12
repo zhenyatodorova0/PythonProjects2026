@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shift Handover Management System (24×7 IT Team)</title>
+    <!-- Static Load -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div id="box">
+        {% include 'common/nav.html' %}
+
+        {% block context %}
+        {% endblock  %}
+
+        {% include 'common/footer.html' %}
+
+    </div>
+  </body>
+</html>
