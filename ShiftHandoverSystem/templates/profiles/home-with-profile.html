@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <section id="catalogPage">
 
-{% if albums %}
-    <h1>All ALbums</h1>
+{% if important_updates %}
+    <h1>All Important Updates</h1>
+    <img src="{% static 'images/Important_updates_image.png'%}" alt="Cover Image" />
 {% else %}
-    <p>No Albums in Catalog!</p>
+    <p>No recent updates!</p>
 {% endif %}
 
-{% for album in albums %}
+{% for update in important_updates %}
     <div class="card-box">
-        <img src="{{ album.image_url }}/images/BrandiCarlile.png" alt="Cover Image" />
-        <div>
-            <div class="text-center">
-                <p class="name">Name: {{ album.album_name}}</p>
-                <p class="artist">Artist: {{ album.artist }}</p>
-                <p class="genre">Genre: {{ album.genre }}</p>
-                <p class="price">Price: ${{ album.price|floatformat:2 }}</p>
-            </div>
-            <div class="btn-group">
-                <a href="{% url 'albums:details' album.pk %}">Details</a>
-            </div>
+        <div class="text-center">
+            <img src="{% static update.category_image %}" alt="{{ update.category }}">
+            <p class="title">Title: {{ update.title}}</p>
+            <p class="description">Description: {{ update.description }}</p>
+            <p class="category">Category: {{ update.category }}</p>
+            <p class="created_at">Created at: {{ update.created_at }}</p>
         </div>
+            <div class="btn-group">
+                <a href="{% url 'updates:details' update.pk %}">Details</a>
+            </div>
     </div>
 {% empty %}
 
