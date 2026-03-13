@@ -11,7 +11,6 @@ class UpdateBaseForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(attrs={'placeholder': 'Title'}),
             "description": forms.Textarea(attrs={'placeholder': 'Description'}),
-            "category": forms.TextInput(attrs={'placeholder': 'Category'}), #!!!!
             "made_by": forms.HiddenInput(),
             "created_at": models.DateField(auto_now_add=True),
             "updated_at": models.DateField(auto_now=True),

@@ -96,3 +96,11 @@
 .actionBtn > a:hover {
 	background-position: right;
 }
+
+.update-wrapper {
+    width: 700px;
+    min-height: 280px;
+    height: auto;
+    padding: 18px 24px;
+    margin: 24px auto 120px;
+}

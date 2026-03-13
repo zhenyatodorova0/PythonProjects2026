@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="catalogPage">
+    {% if important_updates %}
+        <h1>All Important Updates</h1>
+        {% for update in important_updates %}
+            <div class="card-box">
+                <div class="text-center">
+                    <img src="{% static update.category_image %}" alt="{{ update.category }}">
+                    <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ update.title }}</span></p>
+                    <p class="description"><span class="field-label">Description:</span> <span class="field-value">{{ update.description }}</span></p>
+                    <p class="category"><span class="field-label">Category:</span> <span class="field-value">{{ update.category }}</span></p>
+                    <p class="created_at"><span class="field-label">Created at:</span> <span class="field-value">{{ update.created_at }}</span></p>
+                </div>
+                <div class="btn-group">
+                    <a href="{% url 'important_updates:update-details' update.pk %}">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No recent updates!</p>
+    {% endif %}
+</section>
+{% endblock %}

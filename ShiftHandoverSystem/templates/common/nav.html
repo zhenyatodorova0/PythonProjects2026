@@ -3,12 +3,13 @@
 <header>
 <nav>
   <img src="{% static 'images/Handover_circle_static_file.png'%}" alt="Team" />
-  <a href="#">Home</a>
+  <a href="{% url 'profiles:home' %}">Home</a>
   <ul></ul>
   <ul>
     <!--Only for user with created profile-->
-    <li><a href="{% url 'profiles:create' %}">Create Profile</a></li>
-    <li><a href="{% url 'profiles:details' %}">Profile</a></li>
+    <li><a href="{% url 'important_updates:list' %}">All Important Updates</a></li>
+    <li><a href="{% url 'important_updates:create' %}">Create Update</a></li>
+    <li><a href="{% url 'profiles:detail' %}">Profile</a></li>
   </ul>
 </nav>
 </header>
