@@ -2,26 +2,17 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 
 from important_updates.forms import UpdateCreateForm, UpdateEditForm
+from important_updates.mixins import AttachOwnerMixin
 from important_updates.models import Update
 from profiles.util import get_profile
 
 
 # Create your views here.
-class UpdateCreateView(CreateView):
+class UpdateCreateView(CreateView, AttachOwnerMixin):
     model = Update
     form_class = UpdateCreateForm
     success_url = reverse_lazy('profiles:home')
     template_name = 'important_updates/updates-add.html'
-
-    def get_initial(self) -> dict:
-        initial = super().get_initial()
-        initial["made_by"] = get_profile()
-        return initial
-
-    def form_valid(self, form):
-        form.instance.made_by = get_profile()
-        return super().form_valid(form)
-
 
 class UpdateListView(ListView):
     model = Update
@@ -36,7 +27,7 @@ class UpdateDetailView(DetailView):
     context_object_name = 'update'
 
 
-class UpdateEditView(UpdateView):
+class UpdateEditView(UpdateView, AttachOwnerMixin):
     model = Update
     form_class = UpdateEditForm
     template_name = 'important_updates/updates-edit.html'

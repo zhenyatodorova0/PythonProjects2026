@@ -16,7 +16,7 @@
       <p>
         <span class="field-label">Description:</span> <span class="field-value">{{ update.description }}</span>
       </p>
-      <h4>Made by: {{ update.made_by }}</h4>
+      <h4><span class="field-label">Made by:</span> <span class="field-value">{{ update.made_by.username|default:"Unknown" }}</span></h4>
       <h4><span class="field-label">Created at:</span> <span class="field-value">{{ update.created_at }}</span></h4>
     </div>
 
