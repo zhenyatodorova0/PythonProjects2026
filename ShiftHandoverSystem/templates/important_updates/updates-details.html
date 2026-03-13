@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <section id="detailsPage">
 <div class="wrapper">
-  <div class="albumCover">
-    <!-- Album Image -->
-    <img src="{{ album.image_url }} %}" alt="Cover Image" />
+  <div class="UpdateCover">
+    <!-- Update Image -->
+    <img src="{% static 'images/Important_updates_image.png'%}" alt="Cover Image" />
   </div>
 
-  <div class="albumInfo">
-    <div class="albumText">
-      <!-- Album Info -->
-      <h1>Name: {{ album.album_name }}</h1>
-      <h3>Artist: {{ album.artist }}</h3>
-      <h4>Genre: {{ album.genre }}</h4>
-      <h4>Price: ${{ album.price|floatformat:2 }}</h4>
+  <div class="UpdateInfo">
+    <div class="UpdateText">
+      <!-- Update Info -->
+      <h1>Title: {{ update.title }}</h1>
+      <h4>Category: {{ update.category }}</h4>
       <p>
-        Description: {{ album.description }}
+        Description: {{ update.description }}
       </p>
+      <h4>Made by: {{ update.made_by }}</h4>
+      <h4>Created at: {{ update.created_at }}</h4>
     </div>
 
     <div class="actionBtn">
-      <!-- Album Buttons -->
-      <a href="{% url 'albums:edit' album.pk %}" class="edit">Edit</a>
-      <a href="{% url 'albums:delete' album.pk %}" class="remove">Delete</a>
+      <!-- Update Buttons -->
+      <a href="{% url 'updates:edit' update.pk %}" class="edit">Edit</a>
+      <a href="{% url 'updates:delete' update.pk %}" class="remove">Delete</a>
     </div>
   </div>
 </div>
