@@ -24,4 +24,5 @@ import profiles
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('profiles.urls')),
+    path('important_updates/', include('important_updates.urls')),
 ]

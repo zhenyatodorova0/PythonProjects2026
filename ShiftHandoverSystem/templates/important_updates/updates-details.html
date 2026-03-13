@@ -3,28 +3,27 @@
 
 {% block content %}
 <section id="detailsPage">
-<div class="wrapper">
+<div class="wrapper update-wrapper">
   <div class="UpdateCover">
     <!-- Update Image -->
-    <img src="{% static 'images/Important_updates_image.png'%}" alt="Cover Image" />
   </div>
 
   <div class="UpdateInfo">
     <div class="UpdateText">
       <!-- Update Info -->
-      <h1>Title: {{ update.title }}</h1>
-      <h4>Category: {{ update.category }}</h4>
+      <h1><span class="field-label">Title:</span> <span class="field-value">{{ update.title }}</span></h1>
+      <h4><span class="field-label">Category:</span> <span class="field-value">{{ update.category }}</span></h4>
       <p>
-        Description: {{ update.description }}
+        <span class="field-label">Description:</span> <span class="field-value">{{ update.description }}</span>
       </p>
-      <h4>Made by: {{ update.made_by }}</h4>
-      <h4>Created at: {{ update.created_at }}</h4>
+      <h4><span class="field-label">Made by:</span> <span class="field-value">{{ update.made_by.username|default:"Unknown" }}</span></h4>
+      <h4><span class="field-label">Created at:</span> <span class="field-value">{{ update.created_at }}</span></h4>
     </div>
 
     <div class="actionBtn">
       <!-- Update Buttons -->
-      <a href="{% url 'updates:edit' update.pk %}" class="edit">Edit</a>
-      <a href="{% url 'updates:delete' update.pk %}" class="remove">Delete</a>
+      <a href="{% url 'important_updates:update-edit' update.pk %}" class="edit">Edit</a>
+      <a href="{% url 'important_updates:update-delete' update.pk %}" class="remove">Delete</a>
     </div>
   </div>
 </div>

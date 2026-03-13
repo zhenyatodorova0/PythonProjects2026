@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import DetailView, DeleteView
 
-from important_updates.models import Update
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from profiles.util import get_profile
@@ -21,9 +20,6 @@ class HomeView(View):
 
         if not profile:
             return render(request, 'profiles/home-no-profile.html', context)
-
-        all_updates = Update.objects.all()
-        context['important_updates'] = all_updates
 
         return render(request, 'profiles/home-with-profile.html', context)
 
@@ -45,7 +41,7 @@ class ProfileDetailView(DetailView):
 
     def get_context_data(self, **kwargs) -> dict:
         kwargs.update({
-            "important_updates_count": self.object.important_updates.count(),
+            "important_updates_count": self.object.updates_made_by.count(),
         })
         return super().get_context_data(**kwargs)
 

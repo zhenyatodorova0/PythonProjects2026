@@ -96,3 +96,28 @@
 .actionBtn > a:hover {
 	background-position: right;
 }
+
+.update-wrapper {
+    width: 700px;
+    min-height: 280px;
+    height: auto;
+    padding: 18px 24px;
+    margin: 24px auto 120px;
+    background-color: rgba(245, 240, 230, 0.95);
+}
+
+.profile-wrapper {
+    background-color: rgba(255, 255, 255, 0.92);
+}
+
+.profile-wrapper .profileText h1 {
+    color: #0d3b66;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+
+.update-wrapper .UpdateText h1,
+.update-wrapper .UpdateText h4,
+.update-wrapper .UpdateText p {
+    color: #0d3b66;
+    font-family: "Lato", serif;
+}

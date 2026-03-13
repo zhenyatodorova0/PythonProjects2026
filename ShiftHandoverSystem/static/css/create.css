@@ -4,8 +4,9 @@ fieldset {
   width: 25em;
   border-radius: 2px;
   border-color: #2d333b;
-  background: #1b1f24;
-  box-shadow: 0 2px 2px #131518;
+  background: rgba(245, 240, 230, 0.95);
+  box-shadow: 0 10px 24px rgba(13, 59, 102, 0.22);
+  font-family: "Lato", serif;
 }
 
 fieldset legend{
@@ -15,7 +16,8 @@ fieldset legend{
   letter-spacing: 0.12em;
   padding: 0.5em;
   color: white;
-  background: #171a1e;
+  background-color: #1b2845;
+  background-image: linear-gradient(315deg, #45a29e 0%, #0d324d 74%);
   -o-border-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #2d333b 50%) 1 round;
   border-width: 1px;
   border-style: solid;
@@ -35,11 +37,48 @@ input, input + label > i, textarea, select {
   transition: all 0.3s ease;
 }
 
+.createPage input,
+.createPage textarea,
+.createPage select,
+.editPage input,
+.editPage textarea,
+.editPage select {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+}
+
+.createPage select option,
+.editPage select option {
+  color: #ffffff !important;
+  background-color: #15171b !important;
+}
+
+.createPage input,
+.createPage textarea,
+.createPage select,
+.editPage input,
+.editPage textarea,
+.editPage select {
+  background-color: rgba(255, 250, 240, 0.96) !important;
+  border-color: #b8aa8c !important;
+  color: #0d3b66 !important;
+  -webkit-text-fill-color: #0d3b66 !important;
+  caret-color: #0d3b66;
+}
+
+.createPage select option,
+.editPage select option {
+  color: #0d3b66 !important;
+  background-color: #f7efe2 !important;
+}
+
 input[type=text], input[type=number], input[type=url], textarea, select {
   font-size: 1.2em;
   line-height: 1;
   padding: 0.3em 0.4em;
   margin: 0 0.5em 1em 0;
+  font-family: "Lato", serif;
 }
 
 input[type=text]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, input[type=url]::-webkit-input-placeholder {
@@ -67,7 +106,7 @@ textarea {
   color: white;
 }
 
-.add-album, .edit-album, .delete-album, .delete-profile {
+.add-album, .edit-album, .delete-album, .delete-profile, .add-update, .edit-update, .delete-update {
 	width: 150px;
 	height: 50px;
 	cursor: pointer;
@@ -89,10 +128,15 @@ textarea {
   margin-top: 20px;
 }
 
+label {
+  font-family: "Lato", serif;
+  color: #0d3b66;
+}
+
 .createPage, .editPage {
   font-family: "Lato", serif;
   font-size: 16px;
-  color: #aab2bd;
+  color: #0d3b66;
   padding: 1em 0 10em;
   width: 800px;
   height: auto;
@@ -117,4 +161,3 @@ textarea::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #39a086;
 }
-

@@ -14,11 +14,14 @@ class Update(models.Model):
     category = models.CharField(
         max_length=30,
         choices=CategoryChoice.choices,
+        default=CategoryChoice.OTHER,
     )
     made_by = models.ForeignKey(
         'profiles.Profile',
         on_delete=models.CASCADE,
         related_name='updates_made_by',
+        null=True,
+        blank=True,
     )
     # shift = models.ForeignKey(
     #     "Shift", on_delete=models.CASCADE

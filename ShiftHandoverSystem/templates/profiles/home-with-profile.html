@@ -2,30 +2,15 @@
 {% load static %}
 
 {% block content %}
-<section id="catalogPage">
-
-{% if important_updates %}
-    <h1>All Important Updates</h1>
-    <img src="{% static 'images/Important_updates_image.png'%}" alt="Cover Image" />
-{% else %}
-    <p>No recent updates!</p>
-{% endif %}
-
-{% for update in important_updates %}
-    <div class="card-box">
-        <div class="text-center">
-            <img src="{% static update.category_image %}" alt="{{ update.category }}">
-            <p class="title">Title: {{ update.title}}</p>
-            <p class="description">Description: {{ update.description }}</p>
-            <p class="category">Category: {{ update.category }}</p>
-            <p class="created_at">Created at: {{ update.created_at }}</p>
-        </div>
-            <div class="btn-group">
-                <a href="{% url 'updates:details' update.pk %}">Details</a>
+    <div class="container-inline">
+        <section id="welcomePage">
+            <div id="welcome-message">
+                <h1>Welcome to</h1>
+                <h1>Shift Handover Management System (24×7)</h1>
             </div>
+            <div class="music-img">
+                <img src="{% static 'images/Handover_circle_static_file.png' %}" alt="handover-icon" />
+            </div>
+        </section>
     </div>
-{% empty %}
-
-{% endfor %}
-</section>
 {% endblock %}
