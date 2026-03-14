@@ -1,15 +1,72 @@
 {% load static %}
+{% url 'profiles:home' as home_url %}
+{% url 'tickets_handover:list' as handover_url %}
+{% url 'important_updates:list' as updates_url %}
+{% url 'feedback:list' as feedback_url %}
+{% url 'profiles:detail' as profile_url %}
+{% url 'common:search' as search_url %}
 
 <header>
 <nav>
-  <img src="{% static 'images/Handover_circle_static_file.png'%}" alt="Team" />
-  <a href="{% url 'profiles:home' %}">Home</a>
-  <ul></ul>
+  <a href="{{ home_url }}" class="icon-link{% if request.path == home_url %} current{% endif %}" aria-label="Home" title="Home" {% if request.path == home_url %}aria-current="page"{% endif %}>
+    <span class="nav-icon" aria-hidden="true">
+      <svg class="nav-icon-svg" viewBox="0 0 24 24" focusable="false">
+        <path d="M3 10.5 12 3l9 7.5"></path>
+        <path d="M5.5 9.5V21h13V9.5"></path>
+        <path d="M9.5 21v-5.5h5V21"></path>
+      </svg>
+    </span>
+    <span class="nav-label">Home</span>
+  </a>
+  <form method="get" action="{{ search_url }}" class="global-search-form">
+    <input
+      type="text"
+      name="q"
+      value="{{ request.GET.q|default:'' }}"
+      placeholder="Search..."
+      class="global-search-input"
+    />
+    <button type="submit" class="global-search-btn">Search</button>
+  </form>
   <ul>
     <!--Only for user with created profile-->
-    <li><a href="{% url 'important_updates:list' %}">All Important Updates</a></li>
-    <li><a href="{% url 'important_updates:create' %}">Create Update</a></li>
-    <li><a href="{% url 'profiles:detail' %}">Profile</a></li>
+    <li>
+      <a href="{{ handover_url }}" class="icon-link{% if active_nav == 'handover' or request.path == handover_url %} current{% endif %}" aria-label="Handover" title="Handover" {% if active_nav == 'handover' or request.path == handover_url %}aria-current="page"{% endif %}>
+        <span class="nav-icon" aria-hidden="true">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" focusable="false">
+            <path d="M4 8h10"></path>
+            <path d="m10.5 4.5 3.5 3.5-3.5 3.5"></path>
+            <path d="M20 16H10"></path>
+            <path d="m13.5 12.5-3.5 3.5 3.5 3.5"></path>
+          </svg>
+        </span>
+        <span class="nav-label">Handover</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ updates_url }}" class="icon-link{% if request.path == updates_url %} current{% endif %}" aria-label="All Important Updates" title="All Important Updates" {% if request.path == updates_url %}aria-current="page"{% endif %}>
+        <span class="nav-icon" aria-hidden="true">&#128221;</span>
+        <span class="nav-label">All Updates</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ feedback_url }}" class="icon-link{% if active_nav == 'feedback' or request.path == feedback_url %} current{% endif %}" aria-label="Feedback" title="Feedback" {% if active_nav == 'feedback' or request.path == feedback_url %}aria-current="page"{% endif %}>
+        <span class="nav-icon" aria-hidden="true">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" focusable="false">
+            <path d="M4 6h16v10H9l-5 4V6z"></path>
+            <path d="M8 10h8"></path>
+            <path d="M8 13h5"></path>
+          </svg>
+        </span>
+        <span class="nav-label">Feedback</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ profile_url }}" class="icon-link{% if request.path == profile_url %} current{% endif %}" aria-label="Profile" title="Profile" {% if request.path == profile_url %}aria-current="page"{% endif %}>
+        <span class="nav-icon" aria-hidden="true">&#128100;</span>
+        <span class="nav-label">Profile</span>
+      </a>
+    </li>
   </ul>
 </nav>
 </header>

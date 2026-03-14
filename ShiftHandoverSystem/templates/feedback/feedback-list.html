@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="catalogPage">
+    {% if feedback_items %}
+        <div class="catalog-topbar">
+            <h1>Feedback</h1>
+            <a href="{% url 'feedback:create' %}" class="create-update-btn">Add Feedback</a>
+        </div>
+        {% for feedback in feedback_items %}
+            <div class="card-box">
+                <div class="text-center">
+                    <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ feedback.title }}</span></p>
+                    <p class="description"><span class="field-label">Description:</span> <span class="field-value">{{ feedback.description }}</span></p>
+                    <p class="owner"><span class="field-label">Owner:</span> <span class="field-value">{{ feedback.owner.username|default:"Unknown" }}</span></p>
+                    <p class="created_at"><span class="field-label">Created at:</span> <span class="field-value">{{ feedback.created_at|date:"d M Y, H:i" }}</span></p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="catalog-topbar">
+            <h1>Feedback</h1>
+            <a href="{% url 'feedback:create' %}" class="create-update-btn">Add Feedback</a>
+        </div>
+        <p>No feedback yet!</p>
+    {% endif %}
+</section>
+{% endblock %}

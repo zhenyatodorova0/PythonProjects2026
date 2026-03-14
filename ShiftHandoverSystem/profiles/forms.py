@@ -13,5 +13,8 @@ class ProfileForm(forms.ModelForm):
             ),
             "email": forms.EmailInput(
                 attrs={'placeholder': 'Email'}
+            ),
+            "password": forms.PasswordInput(
+                attrs={'placeholder': 'Password'}
             )
         }

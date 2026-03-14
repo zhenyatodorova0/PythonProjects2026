@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="createPage">
+  <form method="post">
+    <fieldset>
+      <legend>Add Handover Item</legend>
+      <div class="container">
+        {{ form }}
+        {% csrf_token %}
+        <button class="add-update" type="submit">Add item</button>
+      </div>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}

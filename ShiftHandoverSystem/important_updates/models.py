@@ -23,6 +23,11 @@ class Update(models.Model):
         null=True,
         blank=True,
     )
+    liked_by = models.ManyToManyField(
+        'profiles.Profile',
+        related_name='liked_updates',
+        blank=True,
+    )
     # shift = models.ForeignKey(
     #     "Shift", on_delete=models.CASCADE
     # )
@@ -38,3 +43,7 @@ class Update(models.Model):
             self.CategoryChoice.OTHER: "images/other_update.png",
         }
         return images.get(self.category, "images/default_update.png")
+
+    @property
+    def likes_count(self) -> int:
+        return self.liked_by.count()

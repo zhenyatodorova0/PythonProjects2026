@@ -3,6 +3,11 @@
 {% block content %}
 <section id="detailsPage">
 <div class="wrapper profile-wrapper">
+  {% if no_profile_message %}
+  <div class="profileText">
+    <h1 class="no-profile-message">{{ no_profile_message }}</h1>
+  </div>
+  {% else %}
   <div class="profilePage">
     <img
       src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
@@ -12,8 +17,8 @@
 
   <div class="profileText">
     <!-- Profile Info -->
-    <h1>Username: {{ object.username }}</h1>
-    <h1>Email: {{ object.email }}</h1>
+    <h1><span class="profile-label">Username:</span> <span class="profile-value">{{ object.username }}</span></h1>
+    <h1><span class="profile-label">Email:</span> <span class="profile-value">{{ object.email }}</span></h1>
     <h1>Updates: {{ important_updates_count }}</h1>
   </div>
 
@@ -21,6 +26,7 @@
     <!-- Button for Deleting the Profile -->
     <a href="{% url 'profiles:delete' %}" class="remove">Delete</a>
   </div>
+  {% endif %}
 </div>
 </section>
 {% endblock %}

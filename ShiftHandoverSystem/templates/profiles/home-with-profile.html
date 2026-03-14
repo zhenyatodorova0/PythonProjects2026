@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-inline">
+    <div class="container-inline logged-home-layout">
         <section id="welcomePage">
             <div id="welcome-message">
                 <h1>Welcome to</h1>
@@ -11,6 +11,21 @@
             <div class="music-img">
                 <img src="{% static 'images/Handover_circle_static_file.png' %}" alt="handover-icon" />
             </div>
+        </section>
+        <section class="recent-updates-panel">
+            <h2>Important Updates (Last 7 Days)</h2>
+            {% if recent_important_updates %}
+                <ul>
+                    {% for update in recent_important_updates %}
+                        <li>
+                            <a href="{% url 'important_updates:update-details' update.pk %}">{{ update.title }}</a>
+                            <span>{{ update.created_at|date:"d M Y, H:i" }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recent updates!</p>
+            {% endif %}
         </section>
     </div>
 {% endblock %}

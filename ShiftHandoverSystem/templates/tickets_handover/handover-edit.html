@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="editPage">
+  <form method="post">
+    <fieldset>
+      <legend>Edit Handover Item</legend>
+      <div class="container">
+        {{ form }}
+        {% csrf_token %}
+        <button class="edit-update" type="submit">Edit item</button>
+      </div>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}

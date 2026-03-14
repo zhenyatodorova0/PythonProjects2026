@@ -30,33 +30,33 @@ fieldset legend {
 input, input + label > i {
     border-radius: 3px;
     box-shadow: none;
-    border: 1px solid #384049;
-    background: #15171b;
+    border: 1px solid #b8aa8c;
+    background: rgba(255, 250, 240, 0.96);
     display: block;
     width: 100%;
-    color: white;
+    color: #0d3b66;
     transition: all 0.3s ease;
 }
 
-input[type=text], input[type=number], input[type=email] {
+input[type=text], input[type=number], input[type=email], input[type=password] {
     font-size: 1.2em;
     line-height: 1;
     padding: 0.3em 0.4em;
     margin: 0 0.5em 1em 0;
 }
 
-input[type=text]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, input[type=email]::-webkit-input-placeholder {
+input[type=text]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, input[type=email]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder {
     color: #343b44;
     line-height: 1.2;
     -webkit-transition: all 0.2s ease;
     transition: all 0.2s ease;
 }
 
-input[type=text]:hover, input[type=number]:hover, input[type=email]:hover {
+input[type=text]:hover, input[type=number]:hover, input[type=email]:hover, input[type=password]:hover {
     border-color: #4e5966;
 }
 
-input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus {
     outline: none;
     border-color: #39a086;
 }
@@ -88,6 +88,41 @@ input[type=text]:focus, input[type=number]:focus, input[type=email]:focus {
     font-size: 16px;
     color: #aab2bd;
     padding: 1em 0 10em;
+}
+
+.no-profile-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.no-profile-layout #welcomePage {
+    flex: 1 1 55%;
+    margin: 0;
+}
+
+.no-profile-layout #registerPage {
+    flex: 0 0 32%;
+    padding: 0;
+}
+
+.no-profile-layout #registerPage fieldset {
+    float: none;
+    width: 100%;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .no-profile-layout {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+
+    .no-profile-layout #registerPage {
+        flex: 1 1 auto;
+        width: 100%;
+    }
 }
 
 * {

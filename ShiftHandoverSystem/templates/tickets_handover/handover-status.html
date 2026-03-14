@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="editPage">
+  <form method="post">
+    <fieldset>
+      <legend>Update Status</legend>
+      <div class="container">
+        <p><strong>Ticket:</strong> {{ ticket.ticket_id }} - {{ ticket.title }}</p>
+        {{ form }}
+        {% csrf_token %}
+        <button class="edit-update" type="submit">Status</button>
+      </div>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}
