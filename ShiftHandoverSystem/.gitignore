@@ -1,1 +1,12 @@
-.idea/
+    # Virtual environment
+    .venv/
+
+    # Python cache
+    __pycache__/
+    *.pyc
+
+    # IDE
+    .idea/
+
+    # Database
+    db.sqlite3
