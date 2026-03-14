@@ -7,7 +7,7 @@ from important_updates.models import Update
 class UpdateBaseForm(forms.ModelForm):
     class Meta:
         model = Update
-        fields = '__all__'
+        exclude = ['liked_by']
         widgets = {
             "title": forms.TextInput(attrs={'placeholder': 'Title'}),
             "description": forms.Textarea(attrs={'placeholder': 'Description'}),
@@ -25,5 +25,6 @@ class UpdateDeleteForm(UpdateBaseForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
+            field.required = False
             field.widget.attrs['readonly'] = True
             field.widget.attrs['disabled'] = True

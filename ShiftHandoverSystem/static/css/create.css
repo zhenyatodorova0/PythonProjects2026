@@ -81,11 +81,18 @@ input[type=text], input[type=number], input[type=url], textarea, select {
   font-family: "Lato", serif;
 }
 
-input[type=text]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, input[type=url]::-webkit-input-placeholder {
-  color: #343b44;
+.createPage input[type=text]::placeholder,
+.createPage input[type=number]::placeholder,
+.createPage textarea::placeholder,
+.createPage input[type=url]::placeholder,
+.editPage input[type=text]::placeholder,
+.editPage input[type=number]::placeholder,
+.editPage textarea::placeholder,
+.editPage input[type=url]::placeholder {
+  color: rgba(142, 160, 179, 0.6);
   line-height: 1.2;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  opacity: 1;
 }
 option{
 color: white
@@ -141,6 +148,112 @@ label {
   width: 800px;
   height: auto;
   border-radius: 20px;
+}
+
+.handoverPage {
+  padding: 1em 0 10em;
+}
+
+.handoverPage fieldset {
+  width: min(1100px, 94%);
+}
+
+.handover-table-wrap {
+  margin: 1em auto 1.5em;
+  padding: 0.75em;
+  border-radius: 8px;
+  background: rgba(245, 240, 230, 0.95);
+  box-shadow: 0 10px 24px rgba(13, 59, 102, 0.22);
+  overflow-x: auto;
+}
+
+.handover-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.handover-table th,
+.handover-table td {
+  border: 1px solid #b8aa8c;
+  padding: 0.55em 0.7em;
+  text-align: left;
+  color: #0d3b66;
+  background-color: #f7efe2;
+}
+
+.handover-table th {
+  background-color: #e9dcc5;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.handover-table .handover-row-done td {
+  background-color: rgba(247, 239, 226, 0.58);
+  color: rgba(13, 59, 102, 0.68);
+}
+
+.handover-table .handover-row-done .handover-action-btn {
+  opacity: 0.75;
+}
+
+.handover-actions {
+  white-space: nowrap;
+}
+
+.handover-action-btn {
+  display: inline-block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.handover-edit-btn {
+  background-color: #1f7a8c;
+}
+
+.handover-delete-btn {
+  background-color: #b23a48;
+  margin-left: 0.35rem;
+}
+
+.handover-status-btn {
+  background-color: #6c757d;
+  margin-top: 0.45rem;
+}
+
+.handover-current-status strong {
+  display: block;
+}
+
+.handover-status-entry + .handover-status-entry {
+  margin-top: 0.45rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed #c9bda8;
+}
+
+.handover-current-status small {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #5b6b7a;
+}
+
+.handover-status-form {
+  margin-top: 0.5rem;
+}
+
+.handover-status-form input[type="text"] {
+  width: 100%;
+  min-width: 210px;
+  padding: 0.35rem 0.45rem;
+  border: 1px solid #b8aa8c;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #0d3b66;
 }
 
 * {

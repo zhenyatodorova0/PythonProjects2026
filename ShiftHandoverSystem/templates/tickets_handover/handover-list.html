@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="handoverPage">
+  <fieldset>
+    <legend>Handover</legend>
+    <form method="get" action="{% url 'tickets_handover:create' %}">
+      <button class="add-update" type="submit">Add item</button>
+    </form>
+    <div class="handover-table-wrap">
+      <table class="handover-table">
+        <thead>
+          <tr>
+            <th>type</th>
+            <th>ticket_id</th>
+            <th>title</th>
+            <th>description</th>
+            <th>created_by</th>
+            <th>created_at</th>
+            <th>status</th>
+            <th>current_status</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in tickets %}
+            <tr{% if ticket.status == "Done" %} class="handover-row-done"{% endif %}>
+              <td>{{ ticket.type }}</td>
+              <td>{{ ticket.ticket_id }}</td>
+              <td>{{ ticket.title }}</td>
+              <td>{{ ticket.description|default:"-" }}</td>
+              <td>{{ ticket.created_by.username|default:"Unknown" }}</td>
+              <td>{{ ticket.created_at|date:"d M Y, H:i" }}</td>
+              <td>{{ ticket.status }}</td>
+              <td class="handover-current-status">
+                <div class="handover-status-history">
+                  {% for entry in ticket.status_entries.all %}
+                    <div class="handover-status-entry">
+                      <small>{{ entry.created_at|date:"d M Y, H:i" }}</small>
+                      <strong>{{ entry.status }}</strong>
+                    </div>
+                  {% empty %}
+                    <div class="handover-status-entry">
+                      <small>-</small>
+                      <strong>{{ ticket.status }}</strong>
+                    </div>
+                  {% endfor %}
+                </div>
+                {% if ticket.status != "Done" %}
+                  <form method="post" action="{% url 'tickets_handover:status' ticket.pk %}" class="handover-status-form">
+                    {% csrf_token %}
+                    <input type="text" name="status_text" placeholder="Write status update" required />
+                    <button type="submit" class="handover-action-btn handover-status-btn">STATUS</button>
+                  </form>
+                {% endif %}
+              </td>
+              <td class="handover-actions">
+                <a href="{% url 'tickets_handover:edit' ticket.pk %}" class="handover-action-btn handover-edit-btn">Edit item</a>
+                <a href="{% url 'tickets_handover:delete' ticket.pk %}" class="handover-action-btn handover-delete-btn">Delete item</a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="9">No handover tickets yet.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
+</section>
+{% endblock %}

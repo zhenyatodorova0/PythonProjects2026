@@ -17,3 +17,8 @@ class Profile(models.Model):
         blank=True,
         null=True,
     )
+    password = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )

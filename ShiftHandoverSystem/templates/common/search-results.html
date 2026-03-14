@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="catalogPage" class="global-search-page">
+  <div class="catalog-topbar">
+    <h1>Global Search</h1>
+  </div>
+
+  {% if query %}
+    <p class="global-search-summary">We found {{ total_results }} result{{ total_results|pluralize }} for "{{ query }}"</p>
+
+    {% if total_results > 0 %}
+      {% if feedback_results %}
+        <div class="global-search-group">
+          <h2>Feedback ({{ feedback_results|length }})</h2>
+          {% for item in feedback_results %}
+            <div class="card-box global-search-card">
+              <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ item.title }}</span></p>
+              <p class="description"><span class="field-label">Description:</span> <span class="field-value">{{ item.description }}</span></p>
+              <p><span class="field-label">Owner:</span> <span class="field-value">{{ item.owner.username|default:"Unknown" }}</span></p>
+              <a class="global-search-link" href="{% url 'feedback:list' %}">Open Feedback</a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if updates_results %}
+        <div class="global-search-group">
+          <h2>Important Updates ({{ updates_results|length }})</h2>
+          {% for item in updates_results %}
+            <div class="card-box global-search-card">
+              <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ item.title }}</span></p>
+              <p class="description"><span class="field-label">Description:</span> <span class="field-value">{{ item.description }}</span></p>
+              <p><span class="field-label">Category:</span> <span class="field-value">{{ item.category }}</span></p>
+              <a class="global-search-link" href="{% url 'important_updates:update-details' item.pk %}">Open Update</a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if profiles_results %}
+        <div class="global-search-group">
+          <h2>Profiles ({{ profiles_results|length }})</h2>
+          {% for item in profiles_results %}
+            <div class="card-box global-search-card">
+              <p><span class="field-label">Username:</span> <span class="field-value">{{ item.username }}</span></p>
+              <p><span class="field-label">Email:</span> <span class="field-value">{{ item.email|default:"-" }}</span></p>
+              <a class="global-search-link" href="{% url 'profiles:detail' %}">Open Profile</a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if tickets_results %}
+        <div class="global-search-group">
+          <h2>Handover Tickets ({{ tickets_results|length }})</h2>
+          {% for item in tickets_results %}
+            <div class="card-box global-search-card">
+              <p><span class="field-label">Ticket ID:</span> <span class="field-value">{{ item.ticket_id }}</span></p>
+              <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ item.title }}</span></p>
+              <p><span class="field-label">Type:</span> <span class="field-value">{{ item.type }}</span></p>
+              <p><span class="field-label">Status:</span> <span class="field-value">{{ item.status }}</span></p>
+              <a class="global-search-link" href="{% url 'tickets_handover:list' %}">Open Handover</a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <p class="global-search-empty">No matches found.</p>
+    {% endif %}
+  {% else %}
+    <p class="global-search-empty">Enter a term in the header search bar to search all applications.</p>
+  {% endif %}
+</section>
+{% endblock %}

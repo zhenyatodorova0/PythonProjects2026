@@ -2,62 +2,12 @@
 
 {% block content %}
 <section class="editPage">
-<form>
+<form method="post">
   <fieldset>
     <legend>Delete Update</legend>
     <div class="container">
-      <!-- Form for Deleting an Update -->
-      <label for="name">Update Title:</label>
-      <input
-        id="name"
-        name="name"
-        class="name"
-        type="text"
-        value="Infrastructure issues"
-        disabled=""
-        readonly
-      />
-
-      <label for="artist">Created By:</label>
-      <input
-        id="artist"
-        name="artist"
-        class="artist"
-        type="text"
-        value="Ivan Ivanov"
-        disabled=""
-        readonly
-      />
-
-      <label for="genre">Category:</label>
-      <select id="genre" name="genre">
-        <option value="Technical Update">Technical Update</option>
-      </select>
-
-      <label for="description">Description:</label>
-      <textarea
-        id="description"
-        name="description"
-        class="description"
-        rows="10"
-        cols="10"
-        disabled=""
-        readonly
-      >
-For any infrastructure issues contact the Infra team. During workdays this can be done in the MS Teams Channel "SUPPORT BY INFRA TEAM". During weekends hey can be reached under the Hotline +49 000 000. </textarea
-      >
-
-      <label for="imgUrl">Image URL:</label>
-      <input
-        id="imgUrl"
-        name="imgUrl"
-        class="imgUrl"
-        type="url"
-        value="https://www.faststreamtech.com/wp-content/uploads/2021/01/Infrastructure-management-scaled.jpg"
-        disabled
-        readonly
-      />
-
+        {{ form }}
+        {% csrf_token %}
       <!-- Button for Deleting an Update -->
       <button class="delete-update" type="submit">Delete Update</button>
     </div>

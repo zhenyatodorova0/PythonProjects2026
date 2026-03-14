@@ -5,7 +5,7 @@
 <section id="detailsPage">
 <div class="wrapper update-wrapper">
   <div class="UpdateCover">
-    <!-- Update Image -->
+    <img src="{% static update.category_image %}" alt="{{ update.category }}">
   </div>
 
   <div class="UpdateInfo">
@@ -24,6 +24,18 @@
       <!-- Update Buttons -->
       <a href="{% url 'important_updates:update-edit' update.pk %}" class="edit">Edit</a>
       <a href="{% url 'important_updates:update-delete' update.pk %}" class="remove">Delete</a>
+      <div class="update-actions-like">
+        {% if profile %}
+        <form method="post" action="{% url 'important_updates:update-like' update.pk %}" class="like-form">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <button type="submit" class="like-btn">{% if is_liked %}♥ Liked{% else %}♡ Like{% endif %}</button>
+        </form>
+        {% else %}
+        <button type="button" class="like-btn" disabled>♡ Like</button>
+        {% endif %}
+        <span class="likes-count">{{ update.likes_count }} likes</span>
+      </div>
     </div>
   </div>
 </div>

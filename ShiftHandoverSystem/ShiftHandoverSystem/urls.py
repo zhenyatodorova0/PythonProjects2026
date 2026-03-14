@@ -23,6 +23,9 @@ import profiles
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('common.urls')),
     path('', include('profiles.urls')),
+    path('handover/', include('tickets_handover.urls')),
     path('important_updates/', include('important_updates.urls')),
+    path('feedback/', include('feedback.urls')),
 ]
