@@ -2,30 +2,56 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-inline logged-home-layout">
-        <section id="welcomePage">
-            <div id="welcome-message">
-                <h1>Welcome to</h1>
-                <h1>Shift Handover Management System (24×7)</h1>
+<div class="container-inline home-shell">
+    <section class="home-hero-card logged-home-columns">
+        <div class="home-hero-copy">
+            <p class="home-kicker">Shift Handover Management</p>
+            <h1>Keep the team aligned across every shift.</h1>
+            <p class="home-subtitle">
+                Centralize urgent notes, track pending actions on ongoing tickets, and capture feedback from critical shifts.
+            </p>
+
+            <div class="home-stat-grid">
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Created handover items</span>
+                    <strong>{{ created_handover_items_count }}</strong>
+                </article>
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Created updates</span>
+                    <strong>{{ important_updates_count }}</strong>
+                </article>
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Feedback</span>
+                    <strong>{{ feedback_count }}</strong>
+                </article>
             </div>
-            <div class="music-img">
-                <img src="{% static 'images/Handover_circle_static_file.png' %}" alt="handover-icon" />
-            </div>
-        </section>
+        </div>
+
         <section class="recent-updates-panel">
-            <h2>Important Updates (Last 7 Days)</h2>
+            <div class="panel-heading">
+                <div>
+                    <p class="panel-kicker">Dashboard feed</p>
+                    <h2>Important Updates From The Last 7 Days</h2>
+                </div>
+                <a href="{% url 'important_updates:list' %}" class="panel-link">View all updates</a>
+            </div>
+
             {% if recent_important_updates %}
                 <ul>
                     {% for update in recent_important_updates %}
                         <li>
+                            <div class="update-meta">
+                                <span class="update-category">{{ update.category }}</span>
+                                <span>{{ update.created_at|date:"d M Y, H:i" }}</span>
+                            </div>
                             <a href="{% url 'important_updates:update-details' update.pk %}">{{ update.title }}</a>
-                            <span>{{ update.created_at|date:"d M Y, H:i" }}</span>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <p>No recent updates!</p>
+                <p class="empty-updates-message">No recent updates were posted in the last 7 days.</p>
             {% endif %}
         </section>
-    </div>
+    </section>
+</div>
 {% endblock %}
