@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class TicketsHandoverConfig(AppConfig):
-    name = 'tickets_handover'
+    name = "tickets_handover"

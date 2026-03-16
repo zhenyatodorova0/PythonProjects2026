@@ -4,7 +4,12 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.views import View
 
 from profiles.util import get_profile
-from tickets_handover.forms import TicketCreateForm, TicketDeleteForm, TicketEditForm, TicketStatusForm
+from tickets_handover.forms import (
+    TicketCreateForm,
+    TicketDeleteForm,
+    TicketEditForm,
+    TicketStatusForm,
+)
 from tickets_handover.models import Ticket, TicketStatusHistory
 
 
@@ -15,7 +20,12 @@ class TicketHandoverListView(ListView):
     ordering = ["-created_at"]
 
     def get_queryset(self):
-        return super().get_queryset().select_related("created_by").prefetch_related("status_entries")
+        return (
+            super()
+            .get_queryset()
+            .select_related("created_by")
+            .prefetch_related("status_entries")
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,7 +47,9 @@ class TicketHandoverCreateView(CreateView):
     def form_valid(self, form):
         form.instance.created_by = get_profile()
         response = super().form_valid(form)
-        TicketStatusHistory.objects.create(ticket=self.object, status=self.object.status)
+        TicketStatusHistory.objects.create(
+            ticket=self.object, status=self.object.status
+        )
         return response
 
     def get_context_data(self, **kwargs):
@@ -66,7 +78,9 @@ class TicketHandoverEditView(UpdateView):
         previous_status = self.get_object().status
         response = super().form_valid(form)
         if self.object.status != previous_status:
-            TicketStatusHistory.objects.create(ticket=self.object, status=self.object.status)
+            TicketStatusHistory.objects.create(
+                ticket=self.object, status=self.object.status
+            )
         return response
 
 

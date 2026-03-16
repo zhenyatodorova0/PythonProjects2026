@@ -7,18 +7,48 @@ from profiles.models import Profile
 # Create your models here.
 class Ticket(models.Model):
     class Status(models.TextChoices):
-        OPEN = "Open", "Open",
-        IN_PROGRESS = "In Progress", "In Progress",
-        BLOCKED = "Blocked", "Blocked",
-        DONE = "Done", "Done",
+        OPEN = (
+            "Open",
+            "Open",
+        )
+        IN_PROGRESS = (
+            "In Progress",
+            "In Progress",
+        )
+        BLOCKED = (
+            "Blocked",
+            "Blocked",
+        )
+        DONE = (
+            "Done",
+            "Done",
+        )
 
     class Type(models.TextChoices):
-        ACTION = "Action", "Action",
-        DISCUSSION = "Discussion", "Discussion",
-        QUESTION = "Question", "Question",
-        REVIEW = "Review", "Review",
-        UPDATE = "Update", "Update",
-        INFORMATION = "Information", "Information",
+        ACTION = (
+            "Action",
+            "Action",
+        )
+        DISCUSSION = (
+            "Discussion",
+            "Discussion",
+        )
+        QUESTION = (
+            "Question",
+            "Question",
+        )
+        REVIEW = (
+            "Review",
+            "Review",
+        )
+        UPDATE = (
+            "Update",
+            "Update",
+        )
+        INFORMATION = (
+            "Information",
+            "Information",
+        )
 
     type = models.CharField(
         max_length=30,
@@ -29,9 +59,9 @@ class Ticket(models.Model):
         validators=[
             MinLengthValidator(2),
             RegexValidator(
-                regex=r'^[A-Za-z0-9_]+$',
-            )
-        ]
+                regex=r"^[A-Za-z0-9_]+$",
+            ),
+        ],
     )
     title = models.CharField(
         max_length=200,
@@ -46,9 +76,7 @@ class Ticket(models.Model):
         on_delete=models.CASCADE,
         related_name="ticket_created_by",
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=50,
         choices=Status.choices,

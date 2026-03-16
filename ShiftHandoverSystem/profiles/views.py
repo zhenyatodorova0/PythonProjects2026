@@ -18,45 +18,55 @@ class HomeView(View):
         profile = get_profile()
 
         context = {
-            'form': ProfileForm(),
+            "form": ProfileForm(),
         }
 
         if not profile:
             request.session.pop("profile_last_login", None)
-            return render(request, 'profiles/home-no-profile.html', context)
+            return render(request, "profiles/home-no-profile.html", context)
 
         if not request.session.get("profile_last_login"):
-            request.session["profile_last_login"] = timezone.localtime().strftime("%d %b %Y, %H:%M:%S")
+            request.session["profile_last_login"] = timezone.localtime().strftime(
+                "%d %b %Y, %H:%M:%S"
+            )
 
         seven_days_ago = timezone.now() - timezone.timedelta(days=7)
-        recent_important_updates = list(Update.objects.filter(
-            created_at__gte=seven_days_ago
-        ).order_by("-created_at")[:5])
-        context.update({
-            "profile": profile,
-            "recent_important_updates": recent_important_updates,
-            "recent_updates_count": len(recent_important_updates),
-            "created_handover_items_count": Ticket.objects.filter(created_by=profile).count(),
-            "important_updates_count": profile.updates_made_by.count(),
-            "feedback_count": Feedback.objects.filter(owner=profile).count(),
-            "last_login": request.session.get("profile_last_login"),
-        })
+        recent_important_updates = list(
+            Update.objects.filter(created_at__gte=seven_days_ago).order_by(
+                "-created_at"
+            )[:5]
+        )
+        context.update(
+            {
+                "profile": profile,
+                "recent_important_updates": recent_important_updates,
+                "recent_updates_count": len(recent_important_updates),
+                "created_handover_items_count": Ticket.objects.filter(
+                    created_by=profile
+                ).count(),
+                "important_updates_count": profile.updates_made_by.count(),
+                "feedback_count": Feedback.objects.filter(owner=profile).count(),
+                "last_login": request.session.get("profile_last_login"),
+            }
+        )
 
-        return render(request, 'profiles/home-with-profile.html', context)
-
+        return render(request, "profiles/home-with-profile.html", context)
 
     def post(self, request: HttpRequest) -> HttpResponse:
-            form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST)
 
-            if form.is_valid():
-                form.save()
-                request.session["profile_last_login"] = timezone.localtime().strftime("%d %b %Y, %H:%M:%S")
-                return redirect('profiles:home')
+        if form.is_valid():
+            form.save()
+            request.session["profile_last_login"] = timezone.localtime().strftime(
+                "%d %b %Y, %H:%M:%S"
+            )
+            return redirect("profiles:home")
 
-            return render(request, 'profiles/home-no-profile.html', {'form': form})
+        return render(request, "profiles/home-no-profile.html", {"form": form})
+
 
 class ProfileDetailView(DetailView):
-    template_name = 'profiles/profile-details.html'
+    template_name = "profiles/profile-details.html"
 
     def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
         if not get_profile():
@@ -71,13 +81,16 @@ class ProfileDetailView(DetailView):
         return get_profile()
 
     def get_context_data(self, **kwargs) -> dict:
-        kwargs.update({
-            "important_updates_count": self.object.updates_made_by.count(),
-        })
+        kwargs.update(
+            {
+                "important_updates_count": self.object.updates_made_by.count(),
+            }
+        )
         return super().get_context_data(**kwargs)
 
+
 class ProfileDeleteView(View):
-    template_name = 'profiles/profile-delete.html'
+    template_name = "profiles/profile-delete.html"
 
     def get(self, request: HttpRequest) -> HttpResponse:
         return render(request, self.template_name)
@@ -86,4 +99,4 @@ class ProfileDeleteView(View):
         profile = get_profile()
         if profile:
             profile.delete()
-        return redirect('profiles:home')
+        return redirect("profiles:home")

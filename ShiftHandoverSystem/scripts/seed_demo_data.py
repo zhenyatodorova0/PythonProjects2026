@@ -40,7 +40,9 @@ def ensure_status_history(ticket, statuses):
             TicketStatusHistory.objects.create(ticket=ticket, status=status)
 
 
-def ensure_ticket(*, profile, ticket_id, ticket_type, title, description, status, history):
+def ensure_ticket(
+    *, profile, ticket_id, ticket_type, title, description, status, history
+):
     ticket, created = Ticket.objects.get_or_create(
         ticket_id=ticket_id,
         defaults={
@@ -226,7 +228,9 @@ feedback_items = [
 
 ticket_results = [ensure_ticket(profile=primary_profile, **item) for item in tickets]
 update_results = [ensure_update(profile=primary_profile, **item) for item in updates]
-feedback_results = [ensure_feedback(profile=primary_profile, **item) for item in feedback_items]
+feedback_results = [
+    ensure_feedback(profile=primary_profile, **item) for item in feedback_items
+]
 
 print("Demo data ready.")
 print(

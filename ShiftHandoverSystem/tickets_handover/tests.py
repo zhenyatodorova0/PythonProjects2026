@@ -29,7 +29,9 @@ class TicketHandoverStatusViewTests(TestCase):
 
         self.assertRedirects(response, reverse("tickets_handover:list"))
         self.assertFalse(
-            TicketStatusHistory.objects.filter(ticket=ticket, status="Extra update after done").exists()
+            TicketStatusHistory.objects.filter(
+                ticket=ticket, status="Extra update after done"
+            ).exists()
         )
 
     def test_can_add_current_status_when_ticket_is_not_done(self):
@@ -41,4 +43,8 @@ class TicketHandoverStatusViewTests(TestCase):
         )
 
         self.assertRedirects(response, reverse("tickets_handover:list"))
-        self.assertTrue(TicketStatusHistory.objects.filter(ticket=ticket, status="Work started").exists())
+        self.assertTrue(
+            TicketStatusHistory.objects.filter(
+                ticket=ticket, status="Work started"
+            ).exists()
+        )

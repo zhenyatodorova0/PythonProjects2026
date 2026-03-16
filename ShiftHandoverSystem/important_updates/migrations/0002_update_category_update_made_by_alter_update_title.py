@@ -7,24 +7,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('important_updates', '0001_initial'),
-        ('profiles', '0001_initial'),
+        ("important_updates", "0001_initial"),
+        ("profiles", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='update',
-            name='category',
-            field=models.CharField(choices=[('Technical Update', 'Technical Update'), ('Procedure Update', 'Procedure Update'), ('Other', 'Other')], default='Other', max_length=30),
+            model_name="update",
+            name="category",
+            field=models.CharField(
+                choices=[
+                    ("Technical Update", "Technical Update"),
+                    ("Procedure Update", "Procedure Update"),
+                    ("Other", "Other"),
+                ],
+                default="Other",
+                max_length=30,
+            ),
         ),
         migrations.AddField(
-            model_name='update',
-            name='made_by',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='updates_made_by', to='profiles.profile'),
+            model_name="update",
+            name="made_by",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="updates_made_by",
+                to="profiles.profile",
+            ),
         ),
         migrations.AlterField(
-            model_name='update',
-            name='title',
+            model_name="update",
+            name="title",
             field=models.CharField(max_length=100),
         ),
     ]

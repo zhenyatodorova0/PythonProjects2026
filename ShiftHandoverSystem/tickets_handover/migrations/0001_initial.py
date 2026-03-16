@@ -10,21 +10,71 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('profiles', '0001_initial'),
+        ("profiles", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Ticket',
+            name="Ticket",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.CharField(choices=[('Action', 'Action'), ('Discussion', 'Discussion'), ('Question', 'Question'), ('Review', 'Review'), ('Update', 'Update'), ('Information', 'Information')], max_length=30)),
-                ('ticket_id', models.CharField(max_length=15, validators=[django.core.validators.MinLengthValidator(2), django.core.validators.RegexValidator(regex='^[A-Za-z0-9_]+$')])),
-                ('title', models.CharField(max_length=200)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('status', models.CharField(choices=[('Open', 'Open'), ('In Progress', 'In Progress'), ('Blocked', 'Blocked'), ('Done', 'Done')], max_length=50)),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ticket_created_by', to='profiles.profile')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[
+                            ("Action", "Action"),
+                            ("Discussion", "Discussion"),
+                            ("Question", "Question"),
+                            ("Review", "Review"),
+                            ("Update", "Update"),
+                            ("Information", "Information"),
+                        ],
+                        max_length=30,
+                    ),
+                ),
+                (
+                    "ticket_id",
+                    models.CharField(
+                        max_length=15,
+                        validators=[
+                            django.core.validators.MinLengthValidator(2),
+                            django.core.validators.RegexValidator(
+                                regex="^[A-Za-z0-9_]+$"
+                            ),
+                        ],
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("description", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("Open", "Open"),
+                            ("In Progress", "In Progress"),
+                            ("Blocked", "Blocked"),
+                            ("Done", "Done"),
+                        ],
+                        max_length=50,
+                    ),
+                ),
+                (
+                    "created_by",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="ticket_created_by",
+                        to="profiles.profile",
+                    ),
+                ),
             ],
         ),
     ]
