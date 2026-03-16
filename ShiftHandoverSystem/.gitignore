@@ -10,3 +10,7 @@
 
     # Database
     db.sqlite3
+
+    # Env.
+    .env
+
