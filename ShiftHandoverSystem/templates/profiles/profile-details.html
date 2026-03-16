@@ -2,7 +2,7 @@
 
 {% block content %}
 <section id="detailsPage">
-<div class="wrapper profile-wrapper">
+<div class="wrapper profile-wrapper{% if no_profile_message %} no-profile-wrapper{% endif %}">
   {% if no_profile_message %}
   <div class="profileText">
     <h1 class="no-profile-message">{{ no_profile_message }}</h1>

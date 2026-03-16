@@ -2,27 +2,31 @@
 {% load static %}
 
 {% block content %}
-<div class="container-inline no-profile-layout">
-<section id="welcomePage">
-  <div id="welcome-message">
-    <h1>Welcome to</h1>
-    <h1>Shift Handover Management System (24×7)</h1>
-  </div>
-  <div class="music-img">
-    <img src="{% static 'images/Handover_static_file.png' %}" alt="handover-icon" />
-  </div>
-</section>
+<div class="container-inline home-shell home-shell-auth">
+    <section class="home-hero-card">
+        <div class="home-hero-copy">
+            <p class="home-kicker">Shift Handover Management</p>
+            <h1>Start your shift with a cleaner handover workspace.</h1>
+            <p class="home-subtitle">
+                Create your profile to track updates, review recent changes, and keep the next team informed.
+            </p>
+        </div>
 
-<!-- Registration -->
-<section id="registerPage">
-    <form method="post">
-        <fieldset>
-            <legend>Profile</legend>
-            {{ form }}
-            {% csrf_token %}
-            <button type="submit" class="register">Login</button>
-        </fieldset>
-    </form>
-</section>
+        <section class="auth-card" id="registerPage">
+            <div class="auth-card-header">
+                <p class="panel-kicker">Profile access</p>
+                <h2>Create your profile</h2>
+            </div>
+
+            <form method="post" class="profile-auth-form">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>Profile details</legend>
+                    {{ form }}
+                    <button type="submit" class="register">Login</button>
+                </fieldset>
+            </form>
+        </section>
+    </section>
 </div>
 {% endblock %}

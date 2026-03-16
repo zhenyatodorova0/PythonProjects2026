@@ -46,9 +46,6 @@ class Ticket(models.Model):
         on_delete=models.CASCADE,
         related_name="ticket_created_by",
     )
-    # shift = models.ForeignKey(
-    #     "Shift", on_delete=models.CASCADE
-    # )
     created_at = models.DateTimeField(
         auto_now_add=True
     )

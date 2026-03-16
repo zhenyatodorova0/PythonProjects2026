@@ -27,9 +27,17 @@ class HomeView(View):
             request.session["profile_last_login"] = timezone.localtime().strftime("%d %b %Y, %H:%M:%S")
 
         seven_days_ago = timezone.now() - timezone.timedelta(days=7)
-        context["recent_important_updates"] = Update.objects.filter(
+        recent_important_updates = list(Update.objects.filter(
             created_at__gte=seven_days_ago
-        ).order_by("-created_at")
+        ).order_by("-created_at")[:5])
+        context.update({
+            "profile": profile,
+            "recent_important_updates": recent_important_updates,
+            "recent_updates_count": len(recent_important_updates),
+            "important_updates_count": profile.updates_made_by.count(),
+            "liked_updates_count": profile.liked_updates.count(),
+            "last_login": request.session.get("profile_last_login"),
+        })
 
         return render(request, 'profiles/home-with-profile.html', context)
 

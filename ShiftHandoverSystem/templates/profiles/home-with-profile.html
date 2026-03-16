@@ -2,30 +2,86 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-inline logged-home-layout">
-        <section id="welcomePage">
-            <div id="welcome-message">
-                <h1>Welcome to</h1>
-                <h1>Shift Handover Management System (24×7)</h1>
+<div class="container-inline home-shell">
+    <section class="home-hero-card">
+        <div class="home-hero-copy">
+            <p class="home-kicker">Shift Handover Management</p>
+            <h1>Keep the team aligned across every shift.</h1>
+            <p class="home-subtitle">
+                Centralize urgent notes, recent updates, and your profile activity in one place.
+            </p>
+
+            <div class="home-stat-grid">
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Created updates</span>
+                    <strong>{{ important_updates_count }}</strong>
+                </article>
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Liked updates</span>
+                    <strong>{{ liked_updates_count }}</strong>
+                </article>
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Last 7 days</span>
+                    <strong>{{ recent_updates_count }}</strong>
+                </article>
             </div>
-            <div class="music-img">
-                <img src="{% static 'images/Handover_circle_static_file.png' %}" alt="handover-icon" />
+        </div>
+
+        <aside class="profile-summary-card" aria-label="Profile summary">
+            <div class="profile-summary-header">
+                <div class="profile-avatar" aria-hidden="true">
+                    {{ profile.username|slice:":1"|upper }}
+                </div>
+                <div>
+                    <p class="profile-summary-eyebrow">Signed in as</p>
+                    <h2>{{ profile.username }}</h2>
+                </div>
             </div>
-        </section>
-        <section class="recent-updates-panel">
-            <h2>Important Updates (Last 7 Days)</h2>
-            {% if recent_important_updates %}
-                <ul>
-                    {% for update in recent_important_updates %}
-                        <li>
-                            <a href="{% url 'important_updates:update-details' update.pk %}">{{ update.title }}</a>
+
+            <dl class="profile-summary-list">
+                <div>
+                    <dt>Email</dt>
+                    <dd>{{ profile.email|default:"Not provided" }}</dd>
+                </div>
+                <div>
+                    <dt>Profile status</dt>
+                    <dd>Active</dd>
+                </div>
+                <div>
+                    <dt>Last login</dt>
+                    <dd>{{ last_login|default:"This session" }}</dd>
+                </div>
+            </dl>
+
+            <a href="{% url 'profiles:detail' %}" class="home-primary-link">Open full profile</a>
+        </aside>
+    </section>
+
+    <section class="recent-updates-panel">
+        <div class="panel-heading">
+            <div>
+                <p class="panel-kicker">Dashboard feed</p>
+                <h2>Important Updates From The Last 7 Days</h2>
+            </div>
+            <a href="{% url 'important_updates:list' %}" class="panel-link">View all updates</a>
+        </div>
+
+        {% if recent_important_updates %}
+            <ul>
+                {% for update in recent_important_updates %}
+                    <li>
+                        <div class="update-meta">
+                            <span class="update-category">{{ update.category }}</span>
                             <span>{{ update.created_at|date:"d M Y, H:i" }}</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No recent updates!</p>
-            {% endif %}
-        </section>
-    </div>
+                        </div>
+                        <a href="{% url 'important_updates:update-details' update.pk %}">{{ update.title }}</a>
+                        <p>{{ update.description|truncatechars:150 }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-updates-message">No recent updates were posted in the last 7 days.</p>
+        {% endif %}
+    </section>
+</div>
 {% endblock %}

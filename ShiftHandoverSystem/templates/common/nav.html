@@ -8,15 +8,9 @@
 
 <header>
 <nav>
-  <a href="{{ home_url }}" class="icon-link{% if request.path == home_url %} current{% endif %}" aria-label="Home" title="Home" {% if request.path == home_url %}aria-current="page"{% endif %}>
-    <span class="nav-icon" aria-hidden="true">
-      <svg class="nav-icon-svg" viewBox="0 0 24 24" focusable="false">
-        <path d="M3 10.5 12 3l9 7.5"></path>
-        <path d="M5.5 9.5V21h13V9.5"></path>
-        <path d="M9.5 21v-5.5h5V21"></path>
-      </svg>
-    </span>
-    <span class="nav-label">Home</span>
+  <a href="{{ home_url }}" class="nav-brand{% if request.path == home_url %} current{% endif %}" aria-label="Home" title="Home" {% if request.path == home_url %}aria-current="page"{% endif %}>
+    <img src="{% static 'images/Handover_static_file.png' %}" alt="Shift Handover logo" />
+    <span class="nav-brand-label">Home</span>
   </a>
   <form method="get" action="{{ search_url }}" class="global-search-form">
     <input

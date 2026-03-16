@@ -13,3 +13,9 @@ class TimeStampedModel(models.Model):
     updated = models.DateTimeField(
         auto_now=True
     )
+
+class Like(models.Model):
+    to_photo = models.ForeignKey(
+        "important_updates.Update",
+        on_delete=models.CASCADE,
+    )

@@ -21,7 +21,7 @@ class UpdateListView(ListView):
     model = Update
     template_name = 'important_updates/updates-list.html'
     context_object_name = 'important_updates'
-    ordering = ['-created_at']
+    ordering = ['category', '-created_at']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

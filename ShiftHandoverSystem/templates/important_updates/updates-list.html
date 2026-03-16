@@ -8,32 +8,37 @@
             <h1>All Important Updates</h1>
             <a href="{% url 'important_updates:create' %}" class="create-update-btn">Create Update</a>
         </div>
-        {% for update in important_updates %}
-            <div class="card-box">
-                <div class="text-center">
-                    <img src="{% static update.category_image %}" alt="{{ update.category }}">
-                    <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ update.title }}</span></p>
-                    <p class="description"><span class="field-label">Description:</span> <span class="field-value">{{ update.description }}</span></p>
-                    <p class="category"><span class="field-label">Category:</span> <span class="field-value">{{ update.category }}</span></p>
-                    <p class="created_at"><span class="field-label">Created at:</span> <span class="field-value">{{ update.created_at }}</span></p>
-                </div>
-                <div class="btn-group">
-                    <a href="{% url 'important_updates:update-details' update.pk %}">Details</a>
-                </div>
-                <div class="like-row">
-                    {% if profile %}
-                    <form method="post" action="{% url 'important_updates:update-like' update.pk %}" class="like-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                        <button type="submit" class="like-btn">
-                            {% if update.pk in liked_update_ids %}♥ Liked{% else %}♡ Like{% endif %}
-                        </button>
-                    </form>
-                    {% else %}
-                    <button type="button" class="like-btn" disabled>♡ Like</button>
-                    {% endif %}
-                    <span class="likes-count">{{ update.likes_count }} likes</span>
-                </div>
+        {% regroup important_updates by category as updates_by_category %}
+        {% for category_group in updates_by_category %}
+            <div class="updates-grid">
+                {% for update in category_group.list %}
+                    <div class="card-box">
+                        <div class="text-center">
+                            <img src="{% static update.category_image %}" alt="{{ update.category }}">
+                            <p class="title"><span class="field-label">Title:</span> <span class="field-value">{{ update.title }}</span></p>
+                            <p class="description"><span class="field-label">Description:</span> <span class="field-value">{{ update.description }}</span></p>
+                            <p class="category"><span class="field-label">Category:</span> <span class="field-value">{{ update.category }}</span></p>
+                            <p class="created_at"><span class="field-label">Created at:</span> <span class="field-value">{{ update.created_at }}</span></p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{% url 'important_updates:update-details' update.pk %}">Details</a>
+                        </div>
+                        <div class="like-row">
+                            {% if profile %}
+                            <form method="post" action="{% url 'important_updates:update-like' update.pk %}" class="like-form">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                                <button type="submit" class="like-btn">
+                                    {% if update.pk in liked_update_ids %}♥ Liked{% else %}♡ Like{% endif %}
+                                </button>
+                            </form>
+                            {% else %}
+                            <button type="button" class="like-btn" disabled>♡ Like</button>
+                            {% endif %}
+                            <span class="likes-count">{{ update.likes_count }} likes</span>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         {% endfor %}
     {% else %}
@@ -41,7 +46,7 @@
             <h1>All Important Updates</h1>
             <a href="{% url 'important_updates:create' %}" class="create-update-btn">Create Update</a>
         </div>
-        <p>No recent updates!</p>
+        <h1 class="empty-state-box">No recent updates!</h1>
     {% endif %}
 </section>
 {% endblock %}

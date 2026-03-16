@@ -35,10 +35,12 @@ PROJECT_APPS = [
     'important_updates',
     'tickets_handover',
     'profiles',
-    'common'
+    'common',
+    'accounts',
 ]
 
 INSTALLED_APPS = [
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
