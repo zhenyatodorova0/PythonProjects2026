@@ -7,20 +7,46 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('tickets_handover', '0001_initial'),
+        ("tickets_handover", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='TicketStatusHistory',
+            name="TicketStatusHistory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.CharField(choices=[('Open', 'Open'), ('In Progress', 'In Progress'), ('Blocked', 'Blocked'), ('Done', 'Done')], max_length=50)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('ticket', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='status_entries', to='tickets_handover.ticket')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("Open", "Open"),
+                            ("In Progress", "In Progress"),
+                            ("Blocked", "Blocked"),
+                            ("Done", "Done"),
+                        ],
+                        max_length=50,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "ticket",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="status_entries",
+                        to="tickets_handover.ticket",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-created_at'],
+                "ordering": ["-created_at"],
             },
         ),
     ]

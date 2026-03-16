@@ -32,7 +32,9 @@ class GlobalSearchViewTests(TestCase):
             created_by=self.profile,
             status=Ticket.Status.OPEN,
         )
-        TicketStatusHistory.objects.create(ticket=self.ticket, status="Network triage started")
+        TicketStatusHistory.objects.create(
+            ticket=self.ticket, status="Network triage started"
+        )
         update.liked_by.add(self.profile)
 
     def test_search_returns_results_from_all_apps(self):

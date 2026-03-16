@@ -16,8 +16,7 @@ class TicketCreateForm(forms.ModelForm):
         }
 
 
-class TicketEditForm(TicketCreateForm):
-    ...
+class TicketEditForm(TicketCreateForm): ...
 
 
 class TicketDeleteForm(TicketCreateForm):

@@ -1,55 +1,57 @@
 # Shift Handover System
 
-Shift Handover System is a Django web application developed for teams operating on a 24x7 schedule. It streamlines shift-to-shift communication by centralizing ticket handovers, providing visibility into important updates, and enabling feedback collection from shift members after major outages or other key events, ensuring that essential information is preserved across shifts.
+Shift Handover System is a Django web application for teams working in rotating or 24x7 shifts. It centralizes handover notes, important updates, and follow-up feedback so critical information is not lost between shifts.
 
 ## Overview
 
-The project helps teams:
+The system helps teams:
 
-- hand over information about tickets that require further action or need to be monitored by other shifts
-- share important updates with all team members, organized by category
-- maintain a simple profile-based ownership system
-- collect feedback from users that topic owners can use for future improvements
-- view recent updates directly from the home page
-
-- This makes shift transitions more structured, transparent, and easier to manage.
+- hand over tickets that need monitoring or further action
+- share important operational updates
+- organize updates by category
+- keep simple profile-based ownership of content
+- collect feedback after incidents or major events
 
 ## Main Features
 
 ### Tickets Handover
-- Create handover tickets
-- Edit and delete tickets
-- Track ticket status
-- Store status history for each ticket
-- Organize tickets by type such as Action, Discussion, Question, Review, Update, and Information
+
+- create handover tickets
+- edit and delete tickets
+- track ticket status
+- keep status history
+- organize tickets by type such as Action, Discussion, Question, Review, Update, and Information
 
 ### Important Updates
-- Add important updates for the team
-- Categorize updates as Technical Update, Procedure Update, or Other
-- Like/unlike updates
-- View update details
-- Show recent important updates on the home page
+
+- create important updates for the team
+- group updates by category
+- like and unlike updates
+- review update details
+- show recent updates on the home page
 
 ### Profiles
-- Create a simple user profile
-- View profile details
-- Delete profile
-- Track user-related activity such as count on created updates
+
+- create and manage user profiles
+- view profile details
+- track user-related activity
 
 ### Feedback
-- Submit feedback entries
-- View all submitted feedback
-- Associate feedback with a profile owner
+
+- submit feedback entries
+- review submitted feedback
+- connect feedback to a profile owner
 
 ## Project Structure
 
-- `profiles/` - profile creation, details, and deletion
-- `tickets_handover/` - handover ticket management and status tracking
-- `important_updates/` - update creation, listing, details, editing, deleting, and likes
-- `feedback/` - feedback creation and listing
-- `common/` - shared app components
+- `ShiftHandoverSystem/` - project configuration and settings
+- `tickets_handover/` - handover ticket management
+- `important_updates/` - important updates module
+- `profiles/` - profile management
+- `feedback/` - feedback module
+- `accounts/` - account-related functionality
 - `templates/` - HTML templates
-- `static/` - CSS and image assets
+- `static/` - static assets
 
 ## Technologies Used
 
@@ -59,32 +61,68 @@ The project helps teams:
 - HTML
 - CSS
 
-## Database Configuration
+## Project Setup Guide
 
-The project is configured to use PostgreSQL.
+### Prerequisites
 
-Default database settings in the project:
-- Database name: `shift_handover_system`
-- User: `postgres`
-- Host: `127.0.0.1`
-- Port: `5432`
+Before starting, make sure you have the following installed:
 
-Update the database credentials in `ShiftHandoverSystem/settings.py` before running the project if needed.
+- Python 3
+- PostgreSQL
+- `pip`
+- Git
 
-## Installation
+### Setup Guide
 
-1. Clone the repository
-2. Create and activate a virtual environment
-3. Install dependencies
-4. Configure PostgreSQL
-5. Apply migrations
-6. Run the development server
+#### Step 1: Clone the repository
 
-Example:
+```bash
+git clone <repository-url>
+cd ShiftHandoverSystem
+```
+
+#### Step 2: Create and activate a virtual environment
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install django psycopg2
+```
+
+#### Step 3: Install the project requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Step 4: Configure the environment and run migrations
+
+Create a `.env` file in the project root with the required settings:
+
+```env
+SECRET_KEY=your-secret-key
+DB_NAME=shift_handover_system
+DB_USER=postgres
+DB_PASSWORD=your-password
+DB_HOST=127.0.0.1
+DB_PORT=5432
+```
+
+Then apply the database migrations:
+
+```bash
 python manage.py migrate
+```
+
+#### Step 5: Run the server
+
+```bash
 python manage.py runserver
+```
+
+Open the application in your browser at [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+
+## Notes
+
+- The project uses PostgreSQL as its database backend.
+- Environment variables are loaded from `.env`.
+- If PostgreSQL is running with different credentials, update the `.env` values before starting the application.

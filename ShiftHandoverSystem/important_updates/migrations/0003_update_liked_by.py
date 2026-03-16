@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('important_updates', '0002_update_category_update_made_by_alter_update_title'),
-        ('profiles', '0001_initial'),
+        ("important_updates", "0002_update_category_update_made_by_alter_update_title"),
+        ("profiles", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='update',
-            name='liked_by',
-            field=models.ManyToManyField(blank=True, related_name='liked_updates', to='profiles.profile'),
+            model_name="update",
+            name="liked_by",
+            field=models.ManyToManyField(
+                blank=True, related_name="liked_updates", to="profiles.profile"
+            ),
         ),
     ]
