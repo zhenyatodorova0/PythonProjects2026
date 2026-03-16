@@ -4,10 +4,12 @@ from django.utils import timezone
 from django.views import View
 from django.views.generic import DetailView
 
+from feedback.models import Feedback
 from important_updates.models import Update
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from profiles.util import get_profile
+from tickets_handover.models import Ticket
 
 
 # Create your views here.
@@ -34,8 +36,9 @@ class HomeView(View):
             "profile": profile,
             "recent_important_updates": recent_important_updates,
             "recent_updates_count": len(recent_important_updates),
+            "created_handover_items_count": Ticket.objects.filter(created_by=profile).count(),
             "important_updates_count": profile.updates_made_by.count(),
-            "liked_updates_count": profile.liked_updates.count(),
+            "feedback_count": Feedback.objects.filter(owner=profile).count(),
             "last_login": request.session.get("profile_last_login"),
         })
 

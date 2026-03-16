@@ -3,85 +3,55 @@
 
 {% block content %}
 <div class="container-inline home-shell">
-    <section class="home-hero-card">
+    <section class="home-hero-card logged-home-columns">
         <div class="home-hero-copy">
             <p class="home-kicker">Shift Handover Management</p>
             <h1>Keep the team aligned across every shift.</h1>
             <p class="home-subtitle">
-                Centralize urgent notes, recent updates, and your profile activity in one place.
+                Centralize urgent notes, track pending actions on ongoing tickets, and capture feedback from critical shifts.
             </p>
 
             <div class="home-stat-grid">
+                <article class="home-stat-card">
+                    <span class="home-stat-label">Created handover items</span>
+                    <strong>{{ created_handover_items_count }}</strong>
+                </article>
                 <article class="home-stat-card">
                     <span class="home-stat-label">Created updates</span>
                     <strong>{{ important_updates_count }}</strong>
                 </article>
                 <article class="home-stat-card">
-                    <span class="home-stat-label">Liked updates</span>
-                    <strong>{{ liked_updates_count }}</strong>
-                </article>
-                <article class="home-stat-card">
-                    <span class="home-stat-label">Last 7 days</span>
-                    <strong>{{ recent_updates_count }}</strong>
+                    <span class="home-stat-label">Feedback</span>
+                    <strong>{{ feedback_count }}</strong>
                 </article>
             </div>
         </div>
 
-        <aside class="profile-summary-card" aria-label="Profile summary">
-            <div class="profile-summary-header">
-                <div class="profile-avatar" aria-hidden="true">
-                    {{ profile.username|slice:":1"|upper }}
-                </div>
+        <section class="recent-updates-panel">
+            <div class="panel-heading">
                 <div>
-                    <p class="profile-summary-eyebrow">Signed in as</p>
-                    <h2>{{ profile.username }}</h2>
+                    <p class="panel-kicker">Dashboard feed</p>
+                    <h2>Important Updates From The Last 7 Days</h2>
                 </div>
+                <a href="{% url 'important_updates:list' %}" class="panel-link">View all updates</a>
             </div>
 
-            <dl class="profile-summary-list">
-                <div>
-                    <dt>Email</dt>
-                    <dd>{{ profile.email|default:"Not provided" }}</dd>
-                </div>
-                <div>
-                    <dt>Profile status</dt>
-                    <dd>Active</dd>
-                </div>
-                <div>
-                    <dt>Last login</dt>
-                    <dd>{{ last_login|default:"This session" }}</dd>
-                </div>
-            </dl>
-
-            <a href="{% url 'profiles:detail' %}" class="home-primary-link">Open full profile</a>
-        </aside>
-    </section>
-
-    <section class="recent-updates-panel">
-        <div class="panel-heading">
-            <div>
-                <p class="panel-kicker">Dashboard feed</p>
-                <h2>Important Updates From The Last 7 Days</h2>
-            </div>
-            <a href="{% url 'important_updates:list' %}" class="panel-link">View all updates</a>
-        </div>
-
-        {% if recent_important_updates %}
-            <ul>
-                {% for update in recent_important_updates %}
-                    <li>
-                        <div class="update-meta">
-                            <span class="update-category">{{ update.category }}</span>
-                            <span>{{ update.created_at|date:"d M Y, H:i" }}</span>
-                        </div>
-                        <a href="{% url 'important_updates:update-details' update.pk %}">{{ update.title }}</a>
-                        <p>{{ update.description|truncatechars:150 }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="empty-updates-message">No recent updates were posted in the last 7 days.</p>
-        {% endif %}
+            {% if recent_important_updates %}
+                <ul>
+                    {% for update in recent_important_updates %}
+                        <li>
+                            <div class="update-meta">
+                                <span class="update-category">{{ update.category }}</span>
+                                <span>{{ update.created_at|date:"d M Y, H:i" }}</span>
+                            </div>
+                            <a href="{% url 'important_updates:update-details' update.pk %}">{{ update.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty-updates-message">No recent updates were posted in the last 7 days.</p>
+            {% endif %}
+        </section>
     </section>
 </div>
 {% endblock %}

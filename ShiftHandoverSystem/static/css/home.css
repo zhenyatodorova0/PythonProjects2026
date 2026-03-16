@@ -1,6 +1,6 @@
 body {
     background:
-        linear-gradient(135deg, rgba(253, 247, 234, 0.94), rgba(232, 241, 245, 0.9)),
+        linear-gradient(135deg, rgba(214, 205, 187, 0.76), rgba(183, 198, 206, 0.74)),
         url('/static/images/Background_image_pale.png') center/cover fixed no-repeat;
 }
 
@@ -199,13 +199,16 @@ nav a:hover {
 
 .home-hero-card {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.9fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
     align-items: stretch;
 }
 
+.logged-home-columns {
+    grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.95fr);
+}
+
 .home-hero-copy,
-.profile-summary-card,
 .recent-updates-panel,
 .auth-card {
     background: rgba(250, 248, 242, 0.9);
@@ -217,9 +220,10 @@ nav a:hover {
 
 .home-hero-copy {
     padding: 2.5rem;
-    background:
-        radial-gradient(circle at top left, rgba(69, 162, 158, 0.18), transparent 32%),
-        linear-gradient(135deg, rgba(250, 248, 242, 0.96), rgba(236, 242, 244, 0.96));
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
 }
 
 .home-kicker,
@@ -276,69 +280,6 @@ nav a:hover {
     line-height: 1;
 }
 
-.profile-summary-card {
-    display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
-    padding: 1.7rem;
-}
-
-.profile-summary-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.profile-summary-header h2 {
-    margin: 0;
-    color: #0d3b66;
-    font-size: 1.8rem;
-}
-
-.profile-avatar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 68px;
-    height: 68px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #0d3b66, #1f7a8c);
-    color: #ffffff;
-    font-size: 1.8rem;
-    font-weight: 800;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
-}
-
-.profile-summary-list {
-    margin: 0;
-    display: grid;
-    gap: 1rem;
-}
-
-.profile-summary-list div {
-    padding: 0.9rem 1rem;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.68);
-    border: 1px solid rgba(13, 59, 102, 0.1);
-}
-
-.profile-summary-list dt {
-    color: #6b7d8f;
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.35rem;
-}
-
-.profile-summary-list dd {
-    margin: 0;
-    color: #0d3b66;
-    font-size: 1rem;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-}
-
 .home-primary-link,
 .panel-link {
     display: inline-flex;
@@ -360,18 +301,31 @@ nav a:hover {
 }
 
 .panel-link {
+    width: 150px;
+    min-height: 50px;
     padding: 0.7rem 1rem;
-    background: rgba(13, 59, 102, 0.08);
-    color: #0d3b66;
+    border: none;
+    background-color: #1b2845;
+    background-image: linear-gradient(315deg, #45a29e 0%, #0d324d 74%);
+    background-size: 200% 100%;
+    background-position: left;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    box-shadow: none;
 }
 
 .home-primary-link:hover,
 .panel-link:hover {
     transform: translateY(-1px);
+    background-position: right;
 }
 
 .recent-updates-panel {
     padding: 1.6rem;
+}
+
+.logged-home-columns .recent-updates-panel {
+    align-self: start;
 }
 
 .panel-heading {
@@ -385,7 +339,11 @@ nav a:hover {
 .panel-heading h2 {
     margin: 0;
     color: #0d3b66;
-    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-size: clamp(1.2rem, 2.1vw, 1.65rem);
+    line-height: 1.2;
+    max-width: 18ch;
+    text-shadow: none;
+    background: none;
 }
 
 .recent-updates-panel ul {
@@ -450,36 +408,80 @@ nav a:hover {
 }
 
 .auth-card {
-    padding: 1.7rem;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
 }
 
-.auth-card-header {
-    margin-bottom: 1rem;
+.auth-card-intro {
+    margin: 0.75rem 0 0;
+    color: #4c6175;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    max-width: 34ch;
 }
 
-.auth-card-header h2 {
-    margin: 0;
+.auth-card-badge-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+}
+
+.auth-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 0.8rem;
+    border-radius: 999px;
+    background: rgba(13, 59, 102, 0.08);
+    border: 1px solid rgba(13, 59, 102, 0.1);
     color: #0d3b66;
-    font-size: 2rem;
+    font-size: 0.82rem;
+    font-weight: 700;
 }
 
 .profile-auth-form fieldset {
     float: none;
     width: 100%;
     margin: 0;
-    padding: 0;
-    border: 0;
-    box-shadow: none;
-    background: transparent;
+    padding: 2em;
+    border-radius: 2px;
+    border-color: #2d333b;
+    border-width: 1px;
+    border-style: solid;
+    box-shadow: 0 10px 24px rgba(13, 59, 102, 0.22);
+    background: rgba(245, 240, 230, 0.95);
+    position: relative;
+    z-index: 1;
 }
 
 .profile-auth-form legend {
-    display: none;
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5em;
+    color: #ffffff;
+    font-size: 2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: center;
+    background-color: #1b2845;
+    background-image: linear-gradient(315deg, #45a29e 0%, #0d324d 74%);
+    border-width: 1px;
+    border-style: solid;
 }
 
 .profile-auth-form p {
     margin: 0 0 1rem;
     padding: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .profile-auth-form label {
@@ -496,9 +498,21 @@ nav a:hover {
     min-height: 48px;
     margin: 0;
     padding: 0.75rem 0.95rem;
-    border: 1px solid rgba(13, 59, 102, 0.18);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #b8aa8c !important;
+    border-radius: 3px;
+    background: rgba(255, 250, 240, 0.96) !important;
+    box-shadow: none;
+    color: #0d3b66 !important;
+    -webkit-text-fill-color: #0d3b66 !important;
+    caret-color: #0d3b66;
+}
+
+.profile-auth-form input[type=text]::placeholder,
+.profile-auth-form input[type=email]::placeholder,
+.profile-auth-form input[type=password]::placeholder {
+    font-family: "Lato", serif;
+    color: rgba(142, 160, 179, 0.6);
+    opacity: 1;
 }
 
 .profile-auth-form ul.errorlist {
@@ -511,13 +525,17 @@ nav a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 150px;
     min-height: 50px;
     margin: 0.75rem 0 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: none;
 }
 
 @media (max-width: 960px) {
     .home-hero-card,
+    .logged-home-columns,
     .home-shell-auth .home-hero-card {
         grid-template-columns: 1fr;
     }
@@ -538,7 +556,6 @@ nav a:hover {
     }
 
     .home-hero-copy,
-    .profile-summary-card,
     .recent-updates-panel,
     .auth-card {
         padding: 1.25rem;

@@ -8,20 +8,15 @@
             <p class="home-kicker">Shift Handover Management</p>
             <h1>Start your shift with a cleaner handover workspace.</h1>
             <p class="home-subtitle">
-                Create your profile to track updates, review recent changes, and keep the next team informed.
+                Support seamless shift coverage with a clear handover workspace. Monitor pending work, stay current on key updates, and help upcoming shifts pick up where you left off.
             </p>
         </div>
 
         <section class="auth-card" id="registerPage">
-            <div class="auth-card-header">
-                <p class="panel-kicker">Profile access</p>
-                <h2>Create your profile</h2>
-            </div>
-
             <form method="post" class="profile-auth-form">
                 {% csrf_token %}
                 <fieldset>
-                    <legend>Profile details</legend>
+                    <legend>Create your profile</legend>
                     {{ form }}
                     <button type="submit" class="register">Login</button>
                 </fieldset>
