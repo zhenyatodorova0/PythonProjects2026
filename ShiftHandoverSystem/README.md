@@ -77,14 +77,14 @@ Before starting, make sure you have the following installed:
 #### Step 1: Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/zhenyatodorova0/PythonProjects2026
 cd ShiftHandoverSystem
 ```
 
 #### Step 2: Create and activate a virtual environment
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
@@ -110,6 +110,7 @@ DB_PORT=5432
 Then apply the database migrations:
 
 ```bash
+python manage.py makemigrations
 python manage.py migrate
 ```
 
